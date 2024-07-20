@@ -8,13 +8,13 @@ This project demonstrates the use of an ESP32 microcontroller to interface with 
 - MPU6050 data reading and printing at 500 Hz
 - I2C communication with MPU6050
 - FreeRTOS task management
+- BLE functionality to send device status messages
 
 ## Hardware Requirements
 
 - ESP32 development board
 - MPU6050 module
-- LED (built-in or external)
-- Appropriate connections and power supply
+- LED (I'm using hte built-in one at GPIO 2)
 
 ## Pin Configuration
 
@@ -27,6 +27,7 @@ This project demonstrates the use of an ESP32 microcontroller to interface with 
 - ESP-IDF (Espressif IoT Development Framework)
 - FreeRTOS
 - MPU6050 library (ensure this is properly installed in your project)
+- NimBLE Library (and appropriate SDKConfig)
 
 ## Setup and Configuration
 
@@ -43,3 +44,17 @@ This project demonstrates the use of an ESP32 microcontroller to interface with 
 3. Flash the project to your ESP32:
 ```idf.py -p (PORT) flash```
 Replace (PORT) with your ESP32's serial port (e.g., COM3 on Windows or /dev/ttyUSB0 on Linux).
+
+## How the System Works
+
+### Configurations
+
+SDA (MPU6050) -> GPIO 21 
+SCL (MPU6050) -> GPIO 22 
+LED           -> GPIO 2 
+
+#### Bluetooth:
+
+BLE Initialization: The BLE server initializes with a unique name and starts advertising.
+Connection Handling: When a client connects, the server sends "Device On" or "Device Off" messages depending on the device's state.
+Device Status: The device status is maintained through a variable and updated during the device's operation.
