@@ -62,8 +62,9 @@ void led_task(void *pvParameters)
 {
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
     
+    //100ms on, 100ms off
     TickType_t xLastWakeTime = xTaskGetTickCount();
-    const TickType_t xFrequency = pdMS_TO_TICKS(100); // 5 Hz (100 ms on, 100 ms off)
+    const TickType_t xFrequency = pdMS_TO_TICKS(100); 
 
     while (1) {
         gpio_set_level(LED_PIN, 1);
